@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import './App.css';
 import { getInfinitives, shuffle } from '../../utils';
 import wordsJSON from '../../data/verbs.json'
@@ -9,7 +9,6 @@ type Words = {
   answer: string,
   solved: boolean
 }[]
-
 
 const allData: any = wordsJSON
 
@@ -25,7 +24,6 @@ const data = shuffle(
     solved: false 
   })) as Words
 
-
 const transformAns = (ans: string) => ans.replace('đ', 'd')
 
 const App = () => {
@@ -35,14 +33,36 @@ const App = () => {
   const [skipped, setSkipped] = useState(0);
   const [gameOver, setGameOver] = useState(false)
 
+  const checkAnswer = useCallback((guess) => {
+    const answers = words[currentIdx].answer
+    // multiple answers
+    if (Array.isArray(answers)) {
+      for (let ans of answers) {
+        if (guess === ans || guess === transformAns(ans)) {
+          return true
+        }
+      }
+    } 
+    // just one answer
+    else {
+      const ans = answers.toLowerCase()
+      if (guess === ans || guess === transformAns(ans)) {
+        return true
+      }
+    }
+
+    return false
+
+  }, [words, currentIdx])
+
   const handleChange = (e: any) => {
     setInput(e.target.value)
     
-    const ans = words[currentIdx].answer.toLowerCase()
     const guess = e.target.value.trim().toLowerCase()
-    console.log("hello", ans, e.target.value.trim().toLowerCase())
+    
+    console.log("hello", words[currentIdx].answer, guess)
 
-    if (guess === ans || guess === transformAns(ans)) {
+    if (checkAnswer(guess)) {
       const newWords = [...words];
       newWords[currentIdx].solved = true
       setWords(newWords)

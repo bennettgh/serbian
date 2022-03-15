@@ -2058,48 +2058,5 @@
       "they will expect (plural fem)": "one će očekivati",
       "they will expect (plural neutral)": "ona će očekivati"
     }
-  },
-  "kuvati": {
-    "translation": "to cook",
-    "tags": [],
-    "present": {
-      "i cook": "ja kuvam",
-      "you cook (singular)": "ti kuvaš",
-      "he cooks": "on kuva",
-      "she cooks": "ona kuva",
-      "they cook (singular)": "ono kuva",
-      "we cook": "mi kuvamo",
-      "you cook (plural)": "vi kuvate",
-      "they cook (plural masc)": "oni kuvaju",
-      "they cook (plural fem)": "one kuvaju",
-      "they cook (plural neutral)": "ona kuvaju"
-    },
-    "past": {
-      "i cooked": "ja sam kuvao",
-      "you cooked (singular masc)": "ti si kuvao",
-      "you cooked (singular fem)": "ti si kuvala",
-      "he cooked": "on je kuvao",
-      "she cooked": "ona je kuvala",
-      "they cooked (singular)": "ono je kuvalo",
-      "we cooked": "mi smo kuvali",
-      "you cooked (plural masc)": "vi ste kuvali",
-      "you cooked (plural fem)": "vi ste kuvale",
-      "they cooked (plural masc)": "oni su kuvali",
-      "they cooked (plural fem)": "one su kuvale",
-      "they cooked (plural neutral)": "ona su kuvala"
-    },
-    "future": {
-      "i will cook": "ja ću kuvati",
-      "you will cook (singular)": "ti ćeš kuvati",
-      "he will cook": "on će kuvati",
-      "she will cook": "ona će kuvati",
-      "they will cook (singular)": "ono će kuvati",
-      "we will cook": "mi ćemo kuvati",
-      "you will cook (plural)": "vi ćete kuvati",
-      "they will cook (plural masc)": "oni će kuvati",
-      "they will cook (plural fem)": "one će kuvati",
-      "they will cook (plural neutral)": "ona će kuvati"
-    }
   }
 }
-  
