@@ -9,7 +9,6 @@ type Words = {
   solved: boolean
 }[]
 
-
 const transformAns = (ans: string) => ans.replace('đ', 'd')
 
 const App = () => {
