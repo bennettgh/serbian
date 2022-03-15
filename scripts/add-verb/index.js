@@ -1,14 +1,15 @@
 const inquirer = require('inquirer');
 const fs = require('fs')
 
-async function init() {
-  fs.copyFileSync("../../src/data/verbs.json", `../../src/data/backups/${new Date().getTime()}-verbs.json`);
+const path = '../../src/data/'
+const file = 'verbs.json'
 
+async function init() {
+  fs.copyFileSync(`${path}${file}`, `${path}/backups/${new Date().getTime()}-${file}`);
 
   const {
     infinitive,
     translation,
-    ptStem,
     normality,
     enPresent1PSingular,
     enPresent2PSingular,
@@ -103,12 +104,6 @@ async function init() {
     },
     {
       type: 'input',
-      message: 'Stem for past tense of verb (eg: "radi"):',
-      name: 'ptStem',
-      when: (answers) => answers.normality
-    },
-    {
-      type: 'input',
       message: 'Tags (eg: "modal","important"):',
       name: 'tags',
     },
@@ -163,6 +158,8 @@ async function init() {
 }
   `
   } else {
+    const stem = getStemFromInfinitive(infinitive)
+
     data = `
   "${infinitive}": {
     "translation": "to ${translation}",
@@ -180,18 +177,18 @@ async function init() {
       "they ${enPresent2PSingular} (plural neutral)": "ona ${oni}"
     },
     "past": {
-      "i ${enPast1PSingular}": "ja sam ${ptStem}o",
-      "you ${enPast2PSingular} (singular masc)": "ti si ${ptStem}o",
-      "you ${enPast2PSingular} (singular fem)": "ti si ${ptStem}la",
-      "he ${enPast1PSingular}": "on je ${ptStem}o",
-      "she ${enPast1PSingular}": "ona je ${ptStem}la",
-      "they ${enPast2PSingular} (singular)": "ono je ${ptStem}lo",
-      "we ${enPast2PSingular}": "mi smo ${ptStem}li",
-      "you ${enPast2PSingular} (plural masc)": "vi ste ${ptStem}li",
-      "you ${enPast2PSingular} (plural fem)": "vi ste ${ptStem}le",
-      "they ${enPast2PSingular} (plural masc)": "oni su ${ptStem}li",
-      "they ${enPast2PSingular} (plural fem)": "one su ${ptStem}le",
-      "they ${enPast2PSingular} (plural neutral)": "ona su ${ptStem}la"
+      "i ${enPast1PSingular}": "ja sam ${stem}o",
+      "you ${enPast2PSingular} (singular masc)": "ti si ${stem}o",
+      "you ${enPast2PSingular} (singular fem)": "ti si ${stem}la",
+      "he ${enPast1PSingular}": "on je ${stem}o",
+      "she ${enPast1PSingular}": "ona je ${stem}la",
+      "they ${enPast2PSingular} (singular)": "ono je ${stem}lo",
+      "we ${enPast2PSingular}": "mi smo ${stem}li",
+      "you ${enPast2PSingular} (plural masc)": "vi ste ${stem}li",
+      "you ${enPast2PSingular} (plural fem)": "vi ste ${stem}le",
+      "they ${enPast2PSingular} (plural masc)": "oni su ${stem}li",
+      "they ${enPast2PSingular} (plural fem)": "one su ${stem}le",
+      "they ${enPast2PSingular} (plural neutral)": "ona su ${stem}la"
     },
     "future": {
       "i will ${translation}": "ja ću ${infinitive}",
@@ -210,11 +207,21 @@ async function init() {
   `
   }
 
-
-  const originalVerbs = fs.readFileSync('../../src/data/verbs.json', 'utf-8')
-  const originalWithoutCloseBrackets = originalVerbs.split('\n').slice(0, -1).join("\n") + ','
+  const originalVerbs = fs.readFileSync(`${path}${file}`, 'utf-8')
+  const originalWithoutCloseBrackets = originalVerbs.split('\n').slice(0, -2).join("\n") + ','
   const res = originalWithoutCloseBrackets + data 
-  fs.writeFileSync('../../src/data/verbs.json', res);
+  fs.writeFileSync(`${path}${file}`, res);
 }
 
 init().then(() => console.log("done"));
+
+
+function getStemFromInfinitive(inf) {
+  if (inf.endsWith('sti')) {
+    return inf.substring(0, inf.length - 3)
+  } else if (inf.endsWith('ti')) {
+    return inf.substring(0, inf.length - 2)
+  } else {
+    return ''
+  }
+}
