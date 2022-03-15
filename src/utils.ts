@@ -19,3 +19,12 @@ export const shuffle = (array: any[]) => {
 
   return array;
 }
+
+export const api = {
+  async idk() {
+    const result = await fetch('http://localhost:5000/')
+    const res = await result.json()
+    console.log(res)
+    return res
+  }
+}

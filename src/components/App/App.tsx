@@ -1,6 +1,6 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import './App.css';
-import { getInfinitives, shuffle } from '../../utils';
+import { api, getInfinitives, shuffle } from '../../utils';
 import wordsJSON from '../../data/verbs.json'
 
 type Words = {
@@ -15,7 +15,7 @@ const allData: any = wordsJSON
 const data = shuffle(
     getInfinitives(wordsJSON)
       .map(infinitive => ({ en: allData[infinitive].translation, rs: infinitive }))
-      .slice(20, 40)
+      // .slice(20, 40)
   )
   .map((item, index) => ({ 
     index, 
@@ -33,12 +33,17 @@ const App = () => {
   const [skipped, setSkipped] = useState(0);
   const [gameOver, setGameOver] = useState(false)
 
+  useEffect(() => {
+    console.log(words[currentIdx].answer)
+  }, [currentIdx, words])
+
   const checkAnswer = useCallback((guess) => {
     const answers = words[currentIdx].answer
     // multiple answers
     if (Array.isArray(answers)) {
+
       for (let ans of answers) {
-        if (guess === ans || guess === transformAns(ans)) {
+      if (guess === ans || guess === transformAns(ans)) {
           return true
         }
       }
@@ -55,12 +60,10 @@ const App = () => {
 
   }, [words, currentIdx])
 
-  const handleChange = (e: any) => {
+  const handleChange = async (e: any) => {
     setInput(e.target.value)
     
     const guess = e.target.value.trim().toLowerCase()
-    
-    console.log("hello", words[currentIdx].answer, guess)
 
     if (checkAnswer(guess)) {
       const newWords = [...words];
@@ -71,6 +74,7 @@ const App = () => {
       if (currentIdx === words.length - 1) {
         setGameOver(true)
       } else {
+        await api.idk()
         setCurrentIdx(currentIdx+1)
       }
     }
