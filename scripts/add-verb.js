@@ -1,9 +1,5 @@
 const inquirer = require('inquirer');
-const { VERBS_TABLE_NAME } = require('../database/constants')
-const {
-  insertValueSafely,
-  backupTable
-} = require('../database/api')
+const { insertVerb } = require('../database/api')
 
 async function run() {
 
@@ -201,8 +197,9 @@ async function run() {
     }
   }
 
-  backupTable(VERBS_TABLE_NAME)
-  if (!insertValueSafely(VERBS_TABLE_NAME, infinitive, data)) {
+  const result = insertVerb(infinitive, data)
+
+  if (!result) {
     console.log("Something went wrong")
   }
 }

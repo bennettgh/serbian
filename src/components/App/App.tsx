@@ -6,7 +6,8 @@ type Words = {
   index: number,
   prompt: string,
   answer: string,
-  solved: boolean
+  solved: boolean,
+  key: string
 }[]
 
 const transformAns = (ans: string) => ans.replace('đ', 'd')
@@ -21,24 +22,25 @@ const App = () => {
   useEffect(() => {
     const fetchVerbs = async () => {
       const res = await api.fetchVerbs()
-      console.log(res)
-
-      const infinitives = Object.keys(res).map((infinitive: any) => ({ en: res[infinitive].translation, rs: infinitive }))
-        // .slice(0, 3)
+      
+      
+      const data = Object.keys(res).map((infinitive: any) => ({ en: res[infinitive].translation, rs: infinitive, key: infinitive }))
+        .slice(0, 3)
         .map((item, index) => ({ 
           index, 
           prompt: item.en.toLowerCase(), 
           answer: item.rs, 
-          solved: false 
+          solved: false,
+          key: item.key
         })) as Words
         
-      setWords(shuffle(infinitives))
+      setWords(shuffle(data))
     }
     fetchVerbs()
   }, [])
 
   useEffect(() => {
-    // console.log(words[currentIdx]?.answer)
+    console.log(words[currentIdx]?.answer)
   }, [currentIdx, words])
 
   const checkAnswer = useCallback((guess) => {
@@ -75,11 +77,12 @@ const App = () => {
       setWords(newWords)
       setInput('')
 
+      console.log(await api.postEvent(newWords[currentIdx].key, true))
+
       if (currentIdx === words.length - 1) {
         setGameOver(true)
       } else {
-        await api.idk()
-        setCurrentIdx(currentIdx+1)
+        setCurrentIdx(currentIdx + 1)
       }
     }
     
@@ -96,9 +99,14 @@ const App = () => {
     setGameOver(false)
   }
 
-  const handleSkip = () => {
+  const handleSkip = async () => {
+    await api.postEvent(words[currentIdx].key, false)
     setSkipped(skipped + 1)
-    setCurrentIdx(currentIdx+1)
+    if (currentIdx === words.length - 1) {
+      setGameOver(true)
+    } else {
+      setCurrentIdx(currentIdx + 1)
+    }
   }
 
   return (

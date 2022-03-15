@@ -1,5 +1,11 @@
 const fs = require('fs')
-const { VERBS_TABLE_NAME, RECENCY_TABLE_NAME, BACKUPS_DIR_NAME, TABLES_DIR_NAME } = require('../constants')
+const { 
+  VERBS_TABLE_NAME, 
+  RECENCY_TABLE_NAME, 
+  BACKUPS_DIR_NAME, 
+  TABLES_DIR_NAME,
+  MAX_RECENCY_EVENTS 
+} = require('../constants')
 
 // Helpers
 
@@ -15,50 +21,83 @@ const findDatabaseDirectory = () => {
 const findTablesDirectory = () => `${findDatabaseDirectory()}/${TABLES_DIR_NAME}`
 const findBackupsDirectory = () => `${findDatabaseDirectory()}/${BACKUPS_DIR_NAME}`
 
-// General API
-
-const readTable = (table) => require(`${findTablesDirectory()}/${table}`)
+const readTable = (table) =>JSON.parse(fs.readFileSync(`${findTablesDirectory()}/${table}.json`))//require(`${findTablesDirectory()}/${table}`)
 
 const backupTable = (tableName) => {
-  console.log("here4")
   fs.copyFileSync(
     `${findTablesDirectory()}/${tableName}.json`, 
     `${findBackupsDirectory()}/${tableName}/${new Date().toISOString()}.json`
   );
 }
 
-const insertValueSafely = (tableName, key, value) => {
-  const data = readTable(tableName)
+const overwriteTable = (table, data) => {
+  backupTable(table)
+  fs.writeFileSync(
+    `${findTablesDirectory()}/${table}.json`, 
+    JSON.stringify(data, null, 2)
+  );
+}
 
-  if (/\d/gi.test(key)) return false // contains number
-
-  if (data[key]) {
-    return false
-  } else {
-    data[key] = value
-  }
-
-  fs.writeFileSync(`${findTablesDirectory()}/${tableName}.json`, JSON.stringify(data, null, 2));
-  console.log(`wrote ${key} to ${tableName} table`)
+const createEntry = (table, key, value) => {
+  const tableData = readTable(table)
+  // entry exists
+  if (tableData[key] !== undefined) return false
+  overwriteTable(table, { ...tableData, [key]: value })
+  console.log(`wrote ${key} to ${table} table`)
   return true
 }
 
-// Special API
+const updateEntry = (table, key, value) => {
+  const tableData = readTable(table)
+  // entry does not exist
+  if (tableData[key] === undefined) return false
 
-const updateRecencyTable = () => {
-  backupTable(RECENCY_TABLE_NAME)
+  overwriteTable(table, { ...tableData, [key]: value })
+  console.log(`updated ${key} in ${table} table`)
+  return true
+}
 
+
+const insertVerb = (infinitive, conjugations) => {
+  return createEntry(VERBS_TABLE_NAME, infinitive, conjugations)
+}
+
+const syncRecencyTable = () => {
+  // ensure recency entries exist for all verbs
   const verbData = readTable(VERBS_TABLE_NAME)
-
   for (let verb of Object.keys(verbData)) {
-    insertValueSafely(RECENCY_TABLE_NAME, verb, [])
+    createEntry(RECENCY_TABLE_NAME, verb, [])
+  }
+
+  // clear old recency events
+  const recencyData = readTable(RECENCY_TABLE_NAME)
+  for (let verb of Object.keys(recencyData)) {
+    if (recencyData[verb].length > MAX_RECENCY_EVENTS) {
+      updateEntry(RECENCY_TABLE_NAME, verb, recencyData[verb].slice(0, MAX_RECENCY_EVENTS))
+    }
+  }
+}
+
+const insertRecencyEvent = (key, result) => {
+  const recencyData = readTable(RECENCY_TABLE_NAME)
+
+  const event = { 
+    result, 
+    time: new Date().getTime()
+  }
+
+  if (recencyData[key] !== undefined) {
+    const newValue =  [...recencyData[key], event]
+    return updateEntry(RECENCY_TABLE_NAME, key, newValue)
+  } else {
+    return createEntry(RECENCY_TABLE_NAME, key, [event])
   }
 }
 
 module.exports = {
-  readTable,
-  insertValueSafely,
-  updateRecencyTable,
-  backupTable
+  syncRecencyTable,
+  insertVerb,
+  insertRecencyEvent,
+  readTable
 }
 

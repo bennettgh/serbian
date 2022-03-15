@@ -28,5 +28,20 @@ export const api = {
     const result = await fetch('http://localhost:5000/verbs')
     const res = await result.json()
     return res
+  },
+
+  async postEvent(key: string, result: boolean) {
+    const res = await fetch(`http://localhost:5000/events`, {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        key,
+        result
+      })
+    })
+    return await res
   }
 }
