@@ -51,12 +51,10 @@ const updateEntry = (table, key, value) => {
   const tableData = readTable(table)
   // entry does not exist
   if (tableData[key] === undefined) return false
-
   overwriteTable(table, { ...tableData, [key]: value })
   console.log(`updated ${key} in ${table} table`)
   return true
 }
-
 
 const insertVerb = (infinitive, conjugations) => {
   return createEntry(VERBS_TABLE_NAME, infinitive, conjugations)

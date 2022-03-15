@@ -1,3 +1,5 @@
+export const sanitizeAnswer = (ans: string) => ans.replace('đ', 'd')
+
 export const shuffle = (array: any[]) => {
   let currentIndex = array.length,  randomIndex;
 

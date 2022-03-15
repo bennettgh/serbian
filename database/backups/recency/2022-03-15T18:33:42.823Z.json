@@ -119,21 +119,11 @@
     }
   ],
   "iskoristiti": [],
-  "otvoriti": [
-    {
-      "result": true,
-      "time": 1647369222823
-    }
-  ],
+  "otvoriti": [],
   "zatvoriti": [],
   "početi": [],
   "završiti": [],
-  "hteti": [
-    {
-      "result": true,
-      "time": 1647369228075
-    }
-  ],
+  "hteti": [],
   "morati": [],
   "smeti": [],
   "umeti": [],
@@ -216,12 +206,7 @@
   "zaustaviti": [],
   "hodati": [],
   "čekati": [],
-  "kupiti": [
-    {
-      "result": true,
-      "time": 1647369225908
-    }
-  ],
+  "kupiti": [],
   "umreti": [],
   "pasti": [],
   "ubiti": [],

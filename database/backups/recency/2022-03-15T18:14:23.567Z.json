@@ -1,0 +1,109 @@
+{
+  "biti": [
+    {
+      "result": true,
+      "time": 1647367884635
+    }
+  ],
+  "imati": [],
+  "raditi": [],
+  "praviti": [],
+  "moći": [],
+  "znati": [],
+  "poznavati": [],
+  "razumeti": [],
+  "govoriti": [],
+  "slušati": [],
+  "čuti": [],
+  "videti": [
+    {
+      "result": true,
+      "time": 1647368009588
+    }
+  ],
+  "osetiti": [],
+  "osećati": [],
+  "živeti": [],
+  "želeti": [],
+  "trebati": [],
+  "sviđati se": [],
+  "voleti": [],
+  "davati": [
+    {
+      "result": false,
+      "time": 1647368006984
+    }
+  ],
+  "uzeti": [],
+  "igrati": [],
+  "smejati se": [],
+  "stići": [],
+  "doći": [
+    {
+      "result": false,
+      "time": 1647368005369
+    }
+  ],
+  "ići": [],
+  "otići": [],
+  "putovati": [],
+  "pisati": [],
+  "čitati": [],
+  "brojati": [],
+  "izgovoriti": [],
+  "sećati": [],
+  "zapamtiti": [],
+  "zaboraviti": [],
+  "jesti": [],
+  "probati": [],
+  "iskoristiti": [],
+  "otvoriti": [],
+  "zatvoriti": [],
+  "početi": [],
+  "završiti": [],
+  "hteti": [],
+  "morati": [],
+  "smeti": [],
+  "umeti": [],
+  "izgledati": [],
+  "misliti": [],
+  "očekivati": [],
+  "kuvati": [],
+  "pomeriti": [],
+  "dobiti": [
+    {
+      "result": false,
+      "time": 1647368006399
+    }
+  ],
+  "pogledati": [],
+  "pokušati": [],
+  "naći": [],
+  "pitati": [],
+  "zvati": [],
+  "staviti": [],
+  "pomoći": [],
+  "skrenuti": [],
+  "pokazati": [],
+  "trčati": [],
+  "držati": [],
+  "doneti": [],
+  "sedeti": [],
+  "platiti": [],
+  "upoznati": [],
+  "promeniti": [],
+  "gledati": [],
+  "zaustaviti": [],
+  "hodati": [],
+  "čekati": [],
+  "kupiti": [],
+  "umreti": [],
+  "pasti": [],
+  "ubiti": [],
+  "izabrati": [
+    {
+      "result": true,
+      "time": 1647368045768
+    }
+  ]
+}

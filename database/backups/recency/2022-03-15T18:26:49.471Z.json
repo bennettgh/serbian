@@ -3,10 +3,6 @@
     {
       "result": true,
       "time": 1647367884635
-    },
-    {
-      "result": true,
-      "time": 1647369182254
     }
   ],
   "imati": [],
@@ -29,12 +25,7 @@
   "osećati": [],
   "živeti": [],
   "želeti": [],
-  "trebati": [
-    {
-      "result": true,
-      "time": 1647369060392
-    }
-  ],
+  "trebati": [],
   "sviđati se": [],
   "voleti": [],
   "davati": [
@@ -43,12 +34,7 @@
       "time": 1647368006984
     }
   ],
-  "uzeti": [
-    {
-      "result": true,
-      "time": 1647368814296
-    }
-  ],
+  "uzeti": [],
   "igrati": [
     {
       "result": true,
@@ -56,51 +42,23 @@
     }
   ],
   "smejati se": [],
-  "stići": [
-    {
-      "result": true,
-      "time": 1647369211625
-    }
-  ],
+  "stići": [],
   "doći": [
     {
       "result": false,
       "time": 1647368005369
-    },
-    {
-      "result": true,
-      "time": 1647369218667
     }
   ],
   "ići": [],
-  "otići": [
-    {
-      "result": true,
-      "time": 1647369204022
-    }
-  ],
-  "putovati": [
-    {
-      "result": true,
-      "time": 1647368819309
-    },
-    {
-      "result": true,
-      "time": 1647369216683
-    }
-  ],
+  "otići": [],
+  "putovati": [],
   "pisati": [
     {
       "result": true,
       "time": 1647368063567
     }
   ],
-  "čitati": [
-    {
-      "result": true,
-      "time": 1647369011928
-    }
-  ],
+  "čitati": [],
   "brojati": [],
   "izgovoriti": [],
   "sećati": [],
@@ -112,73 +70,30 @@
     }
   ],
   "jesti": [],
-  "probati": [
-    {
-      "result": true,
-      "time": 1647369200298
-    }
-  ],
+  "probati": [],
   "iskoristiti": [],
-  "otvoriti": [
-    {
-      "result": true,
-      "time": 1647369222823
-    }
-  ],
+  "otvoriti": [],
   "zatvoriti": [],
   "početi": [],
   "završiti": [],
-  "hteti": [
-    {
-      "result": true,
-      "time": 1647369228075
-    }
-  ],
+  "hteti": [],
   "morati": [],
   "smeti": [],
   "umeti": [],
   "izgledati": [],
   "misliti": [],
   "očekivati": [],
-  "kuvati": [
-    {
-      "result": true,
-      "time": 1647368811833
-    },
-    {
-      "result": true,
-      "time": 1647369128660
-    }
-  ],
-  "pomeriti": [
-    {
-      "result": true,
-      "time": 1647369207294
-    }
-  ],
+  "kuvati": [],
+  "pomeriti": [],
   "dobiti": [
     {
       "result": false,
       "time": 1647368006399
-    },
-    {
-      "result": true,
-      "time": 1647368822277
     }
   ],
   "pogledati": [],
-  "pokušati": [
-    {
-      "result": true,
-      "time": 1647369197631
-    }
-  ],
-  "naći": [
-    {
-      "result": true,
-      "time": 1647369214412
-    }
-  ],
+  "pokušati": [],
+  "naći": [],
   "pitati": [
     {
       "result": true,
@@ -186,12 +101,7 @@
     }
   ],
   "zvati": [],
-  "staviti": [
-    {
-      "result": true,
-      "time": 1647368816873
-    }
-  ],
+  "staviti": [],
   "pomoći": [],
   "skrenuti": [],
   "pokazati": [
@@ -205,23 +115,13 @@
   "doneti": [],
   "sedeti": [],
   "platiti": [],
-  "upoznati": [
-    {
-      "result": true,
-      "time": 1647369186593
-    }
-  ],
+  "upoznati": [],
   "promeniti": [],
   "gledati": [],
   "zaustaviti": [],
   "hodati": [],
   "čekati": [],
-  "kupiti": [
-    {
-      "result": true,
-      "time": 1647369225908
-    }
-  ],
+  "kupiti": [],
   "umreti": [],
   "pasti": [],
   "ubiti": [],
@@ -229,10 +129,6 @@
     {
       "result": true,
       "time": 1647368045768
-    },
-    {
-      "result": true,
-      "time": 1647368809471
     }
   ]
 }
