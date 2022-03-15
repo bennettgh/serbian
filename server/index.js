@@ -12,7 +12,7 @@ app.use(cors())
 app.use(bodyParser.json());
 
 app.get('/', (req, res) => {
-  res.json({'Hello': 'World'})
+  res.json({'Hello': 'World!'})
 })
 
 app.get('/verbs', (req, res) => {

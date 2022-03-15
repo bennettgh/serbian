@@ -68,7 +68,7 @@ export const Game = ({ initialData }: { initialData: Question[] }) => {
 
   return (
     <>
-      <div className=' mt-20 text-xl'>
+      <div className='mt-20 text-xl'>
         {questions.reduce((acc: any, curr: any) => curr.solved ? acc + 1 : acc, 0)} / {questions.length} guessed
       </div>
       {
