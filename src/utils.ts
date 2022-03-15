@@ -1,7 +1,3 @@
-export const getInfinitives = (data: any) => {
-  return Object.keys(data)
-}
-
 export const shuffle = (array: any[]) => {
   let currentIndex = array.length,  randomIndex;
 
@@ -25,6 +21,12 @@ export const api = {
     const result = await fetch('http://localhost:5000/')
     const res = await result.json()
     console.log(res)
+    return res
+  },
+
+  async fetchVerbs() {
+    const result = await fetch('http://localhost:5000/verbs')
+    const res = await result.json()
     return res
   }
 }

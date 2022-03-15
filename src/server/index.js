@@ -1,7 +1,8 @@
 const express = require('express')
 const cors = require('cors')
 
-const { updateRecencyTable } = require('../database/api')
+const { readTable, updateRecencyTable } = require('../database/api')
+const { VERBS_TABLE_NAME } = require('../database/constants')
 
 console.log(__dirname)
 
@@ -12,6 +13,10 @@ app.use(cors())
 
 app.get('/', (req, res) => {
   res.json({'Hello': 'World!'})
+})
+
+app.get('/infinitives', (req, res) => {
+  res.json(Object.keys(readTable(VERBS_TABLE_NAME)))
 })
 
 app.listen(port, () => {

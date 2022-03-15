@@ -1,7 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import './App.css';
-import { api, getInfinitives, shuffle } from '../../utils';
-import wordsJSON from '../../data/verbs.json'
+import { api, shuffle } from '../../utils';
 
 type Words = {
   index: number,
@@ -10,31 +9,37 @@ type Words = {
   solved: boolean
 }[]
 
-const allData: any = wordsJSON
-
-const data = shuffle(
-    getInfinitives(wordsJSON)
-      .map(infinitive => ({ en: allData[infinitive].translation, rs: infinitive }))
-      // .slice(20, 40)
-  )
-  .map((item, index) => ({ 
-    index, 
-    prompt: item.en.toLowerCase(), 
-    answer: item.rs, 
-    solved: false 
-  })) as Words
 
 const transformAns = (ans: string) => ans.replace('đ', 'd')
 
 const App = () => {
-  const [words, setWords] = useState<Words>(data);
+  const [words, setWords] = useState<Words>([]);
   const [currentIdx, setCurrentIdx] = useState(0);
   const [input, setInput] = useState('');
   const [skipped, setSkipped] = useState(0);
   const [gameOver, setGameOver] = useState(false)
 
   useEffect(() => {
-    console.log(words[currentIdx].answer)
+    const fetchVerbs = async () => {
+      const res = await api.fetchVerbs()
+      console.log(res)
+
+      const infinitives = Object.keys(res).map((infinitive: any) => ({ en: res[infinitive].translation, rs: infinitive }))
+        // .slice(0, 3)
+        .map((item, index) => ({ 
+          index, 
+          prompt: item.en.toLowerCase(), 
+          answer: item.rs, 
+          solved: false 
+        })) as Words
+        
+      setWords(shuffle(infinitives))
+    }
+    fetchVerbs()
+  }, [])
+
+  useEffect(() => {
+    // console.log(words[currentIdx]?.answer)
   }, [currentIdx, words])
 
   const checkAnswer = useCallback((guess) => {
@@ -104,7 +109,7 @@ const App = () => {
         {words.reduce((acc:any, curr: any) => curr.solved ? acc+1 : acc, 0 )} / {words.length} guessed
       </div>
       <h1 className='text-4xl my-4'>
-        {!gameOver ? words[currentIdx].prompt : "Game over!"}
+        {!gameOver ? words[currentIdx]?.prompt : "Game over!"}
       </h1>
       <input value={input} onChange={handleChange} className='my-4 px-2 py-1 mx-4 rounded-md' />
 
